@@ -314,9 +314,9 @@
     background-size:28px 28px;
   }
   .about-layout{display:grid;grid-template-columns:minmax(310px,40%) 1fr;min-height:560px;max-width:1680px;margin:auto;}
-  .about-photo-slot{position:relative;min-height:560px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;}
-  .about-profile-photo{position:relative;z-index:1;width:min(82%,450px);height:auto;max-height:500px;margin-bottom:28px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 18px 22px rgba(16,30,54,.16));animation:profile-float 6s ease-in-out infinite;}
-  @keyframes profile-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+  .about-photo-slot{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:28px 16px;}
+  .about-photo-frame{position:relative;width:min(94%,420px);aspect-ratio:4/5;border-radius:28px;overflow:hidden;background:linear-gradient(145deg,#e8dcc2,#d9caa8);border:1px solid rgba(16,30,54,.14);box-shadow:0 22px 48px rgba(16,30,54,.13);}
+  .about-profile-photo{position:absolute;left:50%;top:-30%;z-index:1;width:auto;height:165%;max-width:none;object-fit:contain;filter:none;transform:translateX(-50%);animation:none;}
   .about-content{padding:48px 6vw 44px 5vw;display:grid;grid-template-columns:1.25fr .9fr;gap:30px 54px;align-content:center;}
   .about-intro{grid-column:1;}
   .about-intro h2{font-family:'Manrope',sans-serif;font-size:clamp(2.5rem,4.6vw,5rem);line-height:1.02;letter-spacing:-.055em;white-space:nowrap;}
@@ -343,7 +343,7 @@
     .about-layout{grid-template-columns:34% 1fr}.about-content{grid-template-columns:1fr;padding:60px 5vw}.about-intro h2{white-space:normal}.about-experience{grid-column:1;grid-row:auto}
   }
   @media (max-width:760px){
-    .about-layout{display:block}.about-photo-slot{min-height:470px}.about-profile-photo{width:min(88%,430px);max-height:450px}.about-content{display:block;padding:54px 24px}.about-intro h2{font-size:2.65rem}.about-experience{margin-top:46px}
+    .about-layout{display:block}.about-photo-slot{min-height:500px;padding:34px 20px}.about-photo-frame{width:min(86vw,390px)}.about-content{display:block;padding:54px 24px}.about-intro h2{font-size:2.65rem}.about-experience{margin-top:46px}
   }
 
   /* ---------- Skills & Tools ---------- */
@@ -386,19 +386,51 @@
   }
 
   /* ---------- Worked With ---------- */
-  .logo-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:18px; margin-top:44px; }
-  @media (max-width:720px){ .logo-grid{grid-template-columns:repeat(2, 1fr);} }
-  @media (max-width:720px){ #skills,#work{padding:64px 0;} }
-  .logo-chip{
-    aspect-ratio:2.2/1;
-    border:1px dashed var(--line);
-    border-radius:10px;
-    display:flex; align-items:center; justify-content:center;
-    font-size:0.78rem; font-weight:700; color:var(--ink-soft);
-    background:#fff;
-    text-align:center;
-    padding:8px;
+  .logo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px 34px;margin-top:36px;align-items:center;}
+  @media (max-width:720px){.logo-grid{grid-template-columns:repeat(2,1fr);gap:24px 20px;}}
+  @media (max-width:720px){#skills,#work{padding:64px 0;}}
+  .logo-chip{aspect-ratio:2.2/1;min-height:112px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;border-radius:0;padding:10px 14px;overflow:hidden;}
+  .logo-chip img{display:block;width:100%;height:100%;max-width:100%;max-height:86px;object-fit:contain;}
+  .logo-chip.logo-tall img{max-width:68%;max-height:94px;}
+  .logo-chip.logo-wide img{max-width:96%;max-height:66px;}
+  .logo-chip.logo-posh img{width:190%;height:190%;max-width:none;max-height:none;}
+  @media (max-width:720px){.logo-chip{min-height:92px;padding:8px}.logo-chip img{max-height:72px}.logo-chip.logo-tall img{max-height:78px}}
+
+  /* ---------- Logofolio & Project Grids ---------- */
+  #logofolio{padding:96px 0;}
+  .project-bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;grid-auto-flow:dense;align-items:start;margin-top:34px;}
+  .logo-project,.proj-card,.social-shot{position:relative;min-width:0;overflow:hidden;border:1.5px dashed rgba(16,30,54,.2);border-radius:20px;background:rgba(255,255,255,.58);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px;color:var(--ink-soft);font-size:.76rem;font-weight:700;}
+  .logo-project,.proj-card{aspect-ratio:1/1;}
+  .logo-project::before,.proj-card::before,.social-shot::before{content:"";position:absolute;inset:10px;border:1px solid rgba(11,95,255,.1);border-radius:13px;pointer-events:none;}
+  .bento-feature{grid-column:span 2;grid-row:span 2;}
+  .bento-wide{grid-column:span 2;aspect-ratio:2/1;}
+  .placeholder-kicker{display:block;margin-top:6px;color:#6f7b8f;font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;}
+  .logofolio-grid .logo-project{aspect-ratio:2.2/1;min-height:112px;border-radius:0;background:transparent;padding:10px 14px;}
+  .logofolio-grid .logo-project::before{inset:8px;border-radius:10px;border-style:dashed;}
+  .format-grid{display:grid;gap:16px;align-items:start;margin-top:34px;}
+  .banner-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .banner-grid .proj-card{aspect-ratio:16/9;}
+  .brochure-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+  .brochure-grid .proj-card{aspect-ratio:210/297;}
+
+  .social-bento{display:grid;grid-template-columns:1.15fr 3fr;gap:14px;align-items:start;}
+  .social-square-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+  .social-shot{aspect-ratio:1/1;}
+  .social-shot--phone{width:100%;height:auto;aspect-ratio:9/16;align-self:start;background:linear-gradient(160deg,rgba(18,41,107,.1),rgba(255,255,255,.72));}
+  .social-shot--phone::after{content:"";position:absolute;top:12px;width:32%;height:5px;border-radius:99px;background:rgba(16,30,54,.18);}
+  @media (max-width:760px){
+    #logofolio{padding:72px 0;}
+    .logofolio-grid .logo-project{min-height:0;padding:8px;}
+    .project-bento{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+    .bento-feature{grid-row:span 1;aspect-ratio:16/10;}
+    .banner-grid{grid-template-columns:1fr;gap:12px;}
+    .brochure-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+    .social-bento{grid-template-columns:1.1fr 1fr;gap:12px;grid-auto-flow:dense;}
+    .social-square-grid{display:contents;}
+    .social-shot--phone{grid-row:span 2;width:100%;height:auto;align-self:start;}
+    #portfolio .client-block{padding:24px;}
   }
+  @media (max-width:480px){#portfolio .client-block{padding:18px}.logo-project,.proj-card,.social-shot{border-radius:16px;padding:12px}.logo-project::before,.proj-card::before,.social-shot::before{inset:7px;border-radius:10px}}
 
   /* ---------- Portfolio ---------- */
   .cat-divider{
@@ -417,21 +449,6 @@
   .section-block{ margin-bottom:100px; }
   .section-block:last-child{ margin-bottom:0; }
 
-  .proj-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:14px; }
-  @media (max-width:900px){ .proj-grid{grid-template-columns:repeat(3, 1fr);} }
-  @media (max-width:560px){ .proj-grid{grid-template-columns:repeat(2, 1fr);} }
-  .proj-card{
-    aspect-ratio:1/1;
-    border:1.5px dashed var(--line);
-    border-radius:12px;
-    background:#fff;
-    display:flex; align-items:center; justify-content:center;
-    text-align:center;
-    padding:12px;
-    color:var(--ink-soft);
-    font-size:0.72rem;
-    font-weight:600;
-  }
 
   .client-block{
     margin-bottom:70px;
@@ -526,10 +543,9 @@
   .back-to-top:focus-visible{outline:3px solid var(--blue-bright);outline-offset:3px;}
 
   /* ---------- Scroll-triggered blur text reveal ---------- */
-  .reveal-ready .reveal-word{display:inline-block;opacity:0;filter:blur(9px);transform:translateY(13px);transition:opacity .62s ease,filter .72s ease,transform .72s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--word-index) * 22ms);}
-  .reveal-ready .text-reveal.is-visible .reveal-word{opacity:1;filter:blur(0);transform:translateY(0);}
-  .cat-divider.text-reveal .reveal-word{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  @media (prefers-reduced-motion:reduce){.reveal-ready .reveal-word{opacity:1;filter:none;transform:none;transition:none;}}
+  .reveal-ready .text-reveal{opacity:0;filter:blur(8px);translate:0 13px;transition:opacity .62s ease,filter .72s ease,translate .72s cubic-bezier(.2,.8,.2,1);}
+  .reveal-ready .text-reveal.is-visible{opacity:1;filter:blur(0);translate:0 0;}
+  @media (prefers-reduced-motion:reduce){.reveal-ready .text-reveal{opacity:1;filter:none;translate:0 0;transition:none;}}
 
   /* Grid-paper texture across the site, excluding the hero */
   section:not(.hero){
@@ -547,6 +563,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#work">Worked With</a></li>
+      <li><a href="#logofolio">Logofolio</a></li>
       <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -607,7 +624,9 @@
 <section id="about" class="about-showcase" aria-labelledby="about-title">
   <div class="about-layout">
     <div class="about-photo-slot">
-      <img class="about-profile-photo" src="assets/hatim-profile.png" alt="Hatim Mustafa" loading="lazy" width="1066" height="1414">
+      <div class="about-photo-frame">
+        <img class="about-profile-photo" src="assets/hatim-profile-2026.png" alt="Hatim Mustafa" loading="lazy" width="941" height="1672">
+      </div>
     </div>
     <div class="about-content">
       <div class="about-intro">
@@ -649,7 +668,7 @@
         <div class="tool-chip"><span class="ico"><img src="assets/tools/premiere-pro.svg" alt=""></span>Premiere Pro</div>
         <div class="tool-chip"><span class="ico"><img src="assets/tools/after-effects.svg" alt=""></span>After Effects</div>
         <div class="tool-chip"><span class="ico"><img src="assets/tools/canva.svg" alt=""></span>Canva</div>
-        <div class="tool-chip"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#050505"/><path d="M5 7h9l5 4-5 4H5l5-4-5-4Zm0 10h9l5-4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>CapCut</div>
+        <div class="tool-chip"><span class="ico"><img src="assets/tools/capcut.png" alt=""></span>CapCut</div>
         <div class="tool-chip"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" fill="#10A37F"/><path d="M12 6.2a4 4 0 0 1 6.7 2.9 4 4 0 0 1-.5 6.8 4 4 0 0 1-6.2 3.9 4 4 0 0 1-6.7-2.9 4 4 0 0 1 .5-6.8A4 4 0 0 1 12 6.2Z" fill="none" stroke="#fff" stroke-width="1.25"/><path d="m8.4 10.1 7.2 4.1M8.4 14.2l7.2-4.1M12 8v8" stroke="#fff" stroke-width="1.25" stroke-linecap="round"/></svg></span>ChatGPT</div>
         <div class="tool-chip"><span class="ico"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/googlegemini.svg" alt=""></span>Gemini</div>
       </div>
@@ -676,17 +695,38 @@
   <div class="wrap">
     <span class="tag">Worked With</span>
     <h2 class="about-title">Clients I've designed for.</h2>
-    <p class="cat-sub" style="margin-top:14px;">A mix of brands, businesses, and organizations across tech, security, real estate, and retail.</p>
-    <p class="cat-sub" style="margin-top:-18px;">Logos to be added once gathered from past projects.</p>
+    <p class="cat-sub" style="margin-top:14px;">Selected clients I've designed for&mdash;independently and through my role at Grayscale.</p>
     <div class="logo-grid">
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
-      <div class="logo-chip">Logo placeholder</div>
+      <div class="logo-chip logo-tall"><img src="assets/clients/alsons-auto-parts.png" alt="Alsons Auto Parts logo" loading="lazy"></div>
+      <div class="logo-chip logo-wide"><img src="assets/clients/ge-healthcare.png" alt="GE HealthCare logo" loading="lazy"></div>
+      <div class="logo-chip logo-wide"><img src="assets/clients/grayscale.png" alt="GrayScale logo" loading="lazy"></div>
+      <div class="logo-chip logo-tall"><img src="assets/clients/alsons-industries.png" alt="Alsons Industries logo" loading="lazy"></div>
+      <div class="logo-chip logo-tall"><img src="assets/clients/aas-foundation.png" alt="Aas Foundation logo" loading="lazy"></div>
+      <div class="logo-chip logo-wide"><img src="assets/clients/avery-dennison.png" alt="Avery Dennison logo" loading="lazy"></div>
+      <div class="logo-chip logo-wide"><img src="assets/clients/alnnovent-avb-100.png" alt="AlnnoVent AVB-100 logo" loading="lazy"></div>
+      <div class="logo-chip"><img src="assets/clients/alsons-group.png" alt="Alsons Group logo" loading="lazy"></div>
+      <div class="logo-chip logo-wide"><img src="assets/clients/alsons-technology.png" alt="Alsons Technology logo" loading="lazy"></div>
+      <div class="logo-chip logo-posh"><img src="assets/clients/posh-education.png" alt="Posh Education logo" loading="lazy"></div>
+      <div class="logo-chip"><img src="assets/clients/glossy-bliss.png" alt="Glossy Bliss logo" loading="lazy"></div>
+      <div class="logo-chip logo-wide"><img src="assets/clients/bemerch.png" alt="BeMerch logo" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOFOLIO -->
+<section id="logofolio" aria-labelledby="logofolio-title">
+  <div class="wrap">
+    <span class="tag">Logofolio</span>
+    <h2 class="about-title" id="logofolio-title">Identity marks with personality.</h2>
+    <div class="logo-grid logofolio-grid">
+      <div class="logo-project">Logo Project 01</div>
+      <div class="logo-project">Logo Project 02</div>
+      <div class="logo-project">Logo Project 03</div>
+      <div class="logo-project">Logo Project 04</div>
+      <div class="logo-project">Logo Project 05</div>
+      <div class="logo-project">Logo Project 06</div>
+      <div class="logo-project">Logo Project 07</div>
+      <div class="logo-project">Logo Project 08</div>
     </div>
   </div>
 </section>
@@ -704,65 +744,59 @@
     <!-- SOCIAL MEDIA -->
     <div class="section-block">
       <h3 class="cat-divider">Social Media</h3>
-      <p class="cat-sub">Individual client work, separated by brand.</p>
+      <p class="cat-sub">Client campaigns presented as complete, connected visual systems.</p>
 
       <div class="client-block">
         <div class="client-header">
           <div class="client-mark">A</div>
-          <div>
-            <h4>Client Name Placeholder</h4>
-            <span>Social media campaign</span>
-          </div>
+          <div><h4>Client Name Placeholder</h4><span>Social media campaign</span></div>
         </div>
-        <div class="proj-grid">
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
+        <div class="social-bento">
+          <div class="social-shot social-shot--phone">Instagram profile<span class="placeholder-kicker">9:16 screenshot</span></div>
+          <div class="social-square-grid">
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+          </div>
         </div>
       </div>
 
       <div class="client-block">
         <div class="client-header">
           <div class="client-mark">B</div>
-          <div>
-            <h4>Client Name Placeholder</h4>
-            <span>Social media campaign</span>
-          </div>
+          <div><h4>Client Name Placeholder</h4><span>Social media campaign</span></div>
         </div>
-        <div class="proj-grid">
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
+        <div class="social-bento">
+          <div class="social-shot social-shot--phone">Instagram profile<span class="placeholder-kicker">9:16 screenshot</span></div>
+          <div class="social-square-grid">
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+          </div>
         </div>
       </div>
 
       <div class="client-block">
         <div class="client-header">
           <div class="client-mark">C</div>
-          <div>
-            <h4>Client Name Placeholder</h4>
-            <span>Social media campaign</span>
-          </div>
+          <div><h4>Client Name Placeholder</h4><span>Social media campaign</span></div>
         </div>
-        <div class="proj-grid">
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
-          <div class="proj-card">Project placeholder</div>
+        <div class="social-bento">
+          <div class="social-shot social-shot--phone">Instagram profile<span class="placeholder-kicker">9:16 screenshot</span></div>
+          <div class="social-square-grid">
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+            <div class="social-shot">Campaign artwork<span class="placeholder-kicker">1:1 post</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -775,43 +809,40 @@
 
     <div class="section-block">
       <h3 class="cat-divider" style="font-size:clamp(1.8rem,4vw,2.6rem);">Banners</h3>
-      <div class="proj-grid">
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
-        <div class="proj-card">Banner placeholder</div>
+      <div class="format-grid banner-grid">
+        <div class="proj-card">Banner project 01</div>
+        <div class="proj-card">Banner project 02</div>
+        <div class="proj-card">Banner project 03</div>
+        <div class="proj-card">Banner project 04</div>
+        <div class="proj-card">Banner project 05</div>
+        <div class="proj-card">Banner project 06</div>
+        <div class="proj-card">Banner project 07</div>
       </div>
     </div>
 
     <div class="section-block">
       <h3 class="cat-divider" style="font-size:clamp(1.8rem,4vw,2.6rem);">Posters</h3>
-      <div class="proj-grid">
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
-        <div class="proj-card">Poster placeholder</div>
+      <div class="project-bento">
+        <div class="proj-card bento-feature">Poster project 01<span class="placeholder-kicker">Featured work</span></div>
+        <div class="proj-card bento-wide">Poster project 02<span class="placeholder-kicker">Wide format</span></div>
+        <div class="proj-card">Poster project 03</div>
+        <div class="proj-card">Poster project 04</div>
+        <div class="proj-card bento-wide">Poster project 05<span class="placeholder-kicker">Campaign set</span></div>
+        <div class="proj-card">Poster project 06</div>
+        <div class="proj-card">Poster project 07</div>
       </div>
     </div>
 
     <div class="section-block">
       <h3 class="cat-divider" style="font-size:clamp(1.8rem,4vw,2.6rem);">Brochures</h3>
-      <div class="proj-grid">
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
-        <div class="proj-card">Brochure placeholder</div>
+      <div class="format-grid brochure-grid">
+        <div class="proj-card">Brochure project 01</div>
+        <div class="proj-card">Brochure project 02</div>
+        <div class="proj-card">Brochure project 03</div>
+        <div class="proj-card">Brochure project 04</div>
+        <div class="proj-card">Brochure project 05</div>
+        <div class="proj-card">Brochure project 06</div>
+        <div class="proj-card">Brochure project 07</div>
       </div>
     </div>
 
@@ -861,35 +892,12 @@
     ? new Lenis({ autoRaf: true, anchors: true, smoothWheel: true, wheelMultiplier: 1, lerp: 0.085 })
     : null;
 
-  // Aceternity-inspired blur/fade reveal, triggered as text enters the viewport.
-  const revealTargets = document.querySelectorAll('h1,h2,h3,h4,p,.tag,.skills-label,.tool-chip,.skill-pill,.logo-chip,.proj-card,.timeline-item,.contact-links a,footer,.btn');
-  revealTargets.forEach(element => {
-    let wordIndex = 0;
-    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
-    const textNodes = [];
-    while (walker.nextNode()) textNodes.push(walker.currentNode);
-    textNodes.forEach(node => {
-      if (!node.nodeValue.trim()) return;
-      const fragment = document.createDocumentFragment();
-      node.nodeValue.split(/(\s+)/).forEach(part => {
-        if (!part) return;
-        if (/^\s+$/.test(part)) {
-          fragment.appendChild(document.createTextNode(part));
-        } else {
-          const word = document.createElement('span');
-          word.className = 'reveal-word';
-          word.style.setProperty('--word-index', wordIndex++);
-          word.textContent = part;
-          fragment.appendChild(word);
-        }
-      });
-      node.replaceWith(fragment);
-    });
-    element.classList.add('text-reveal');
-  });
+  // Blur/fade reveal triggered as complete text elements enter the viewport.
+  const revealTargets = document.querySelectorAll('h1,h2,h3,h4,p,.tag,.skills-label,.tool-chip,.skill-pill,.logo-chip,.logo-project,.social-shot,.proj-card,.timeline-item,.contact-links a,footer,.btn');
+  revealTargets.forEach(element => element.classList.add('text-reveal'));
   document.documentElement.classList.add('reveal-ready');
 
-  if (reduceMotion) {
+  if (reduceMotion || !('IntersectionObserver' in window)) {
     revealTargets.forEach(element => element.classList.add('is-visible'));
   } else {
     const revealObserver = new IntersectionObserver(entries => {
